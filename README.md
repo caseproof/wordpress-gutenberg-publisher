@@ -16,6 +16,15 @@ cp config.example.ini config.ini
 
 Get application password: `WordPress Dashboard → Users → Profile → Application Passwords`
 
+## Claude Code Skills
+
+This repo includes two skills for Claude Code:
+
+**`/wp-content`** - Full workflow: Claude asks questions, generates content, publishes to WordPress  
+**`/wp-quick`** - Quick publish: Select file, publish
+
+Just type the command in Claude Code. That's it.
+
 ## Usage
 
 ### Generate & Publish (Recommended)
@@ -58,19 +67,11 @@ Works with any REST API-enabled custom post type.
 
 ## Files
 
-- `/wp-content` - Skill for content generation + publishing
-- `/wp-quick` - Skill for quick publishing
+- `.claude/skills/` - Claude Code skills
 - `publish.py` - CLI tool
 - `prompts/` - Content templates
 - `examples/` - Sample content
 - `generated/` - Your generated content (gitignored)
-
-## Skills
-
-**`/wp-content`**: Ask → Generate → Publish  
-**`/wp-quick`**: File → Publish
-
-That's it.
 
 ## Troubleshooting
 
