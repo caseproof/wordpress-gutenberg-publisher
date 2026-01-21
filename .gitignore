@@ -57,3 +57,7 @@ htmlcov/
 *.tmp
 *.bak
 *.backup
+
+# Generated content (user-specific)
+generated/*.md
+!generated/README.md
