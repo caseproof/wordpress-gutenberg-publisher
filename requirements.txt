@@ -1,0 +1,7 @@
+# WordPress Gutenberg Publisher - Dependencies
+
+# Markdown to HTML conversion
+markdown>=3.5.0
+
+# HTTP requests for WordPress REST API
+requests>=2.31.0
