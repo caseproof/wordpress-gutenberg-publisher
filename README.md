@@ -20,14 +20,14 @@ Perfect for:
 
 ```bash
 # 1. Install dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # 2. Configure WordPress
 cp config.example.ini config.ini
 # Edit config.ini with your WordPress details
 
 # 3. Publish content
-python publish.py examples/landing-page-example.md
+python3 publish.py examples/simple-blog-post.md
 ```
 
 See [QUICK_START.md](./QUICK_START.md) for detailed setup.
@@ -36,7 +36,7 @@ See [QUICK_START.md](./QUICK_START.md) for detailed setup.
 
 ### Interactive Mode (Recommended for First Time)
 ```bash
-python publish.py my-content.md
+python3 publish.py my-content.md
 ```
 
 You'll be prompted for:
@@ -47,14 +47,38 @@ You'll be prompted for:
 ### Direct Mode (For Scripts/Automation)
 ```bash
 # Publish as draft
-python publish.py content.md --status draft
+python3 publish.py content.md --status draft
 
 # Publish immediately as page
-python publish.py content.md --status publish --post-type pages
+python3 publish.py content.md --status publish --post-type pages
 
 # Custom post type with slug
-python publish.py content.md --post-type landing_pages --slug my-page
+python3 publish.py content.md --post-type landing_pages --slug my-page
 ```
+
+## Custom Post Types
+
+Works seamlessly with any WordPress custom post type that has REST API support enabled.
+
+**Common use cases:**
+```bash
+# Knowledge base articles (Heroic KB)
+python3 publish.py article.md --post-type ht_kb --status publish
+
+# Landing pages (custom post type)
+python3 publish.py landing-page.md --post-type landing_pages --status draft
+
+# Portfolio items
+python3 publish.py project.md --post-type portfolio --status publish
+
+# Documentation (custom post type)
+python3 publish.py docs.md --post-type documentation --status publish
+```
+
+**Finding your custom post type name:**
+1. In WordPress, check your custom post type settings
+2. Or use the REST API to list available types: `https://yoursite.com/wp-json/wp/v2/types`
+3. The REST API "slug" is what you use for `--post-type`
 
 ## Features
 
@@ -92,13 +116,13 @@ wordpress-gutenberg-publisher/
 │
 ├── prompts/               # AI prompts for content + system building
 │   ├── HOW_TO_BUILD_THIS.md
-│   ├── content-generation.md
-│   ├── landing-page-generator.md
-│   └── documentation-generator.md
+│   ├── content-generation-prompts.md
+│   └── landing-page-templates.md
 │
 └── examples/              # Sample content + usage
-    ├── landing-page-example.md
-    └── documentation-example.md
+    ├── simple-blog-post.md
+    ├── feature-overview-landing-page.md
+    └── product-feature-deep-dive.md
 ```
 
 ## Learning Resources
@@ -106,10 +130,11 @@ wordpress-gutenberg-publisher/
 Want to build your own tools like this? See:
 - [LEARNING_GUIDE.md](./LEARNING_GUIDE.md) - How this tool was built
 - [prompts/HOW_TO_BUILD_THIS.md](./prompts/HOW_TO_BUILD_THIS.md) - The actual prompts used
+- [prompts/landing-page-templates.md](./prompts/landing-page-templates.md) - Landing page templates
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.8+ (Python 3.11+ recommended for SSL compatibility)
 - WordPress 5.0+ with REST API enabled
 - WordPress Application Password (or Basic Auth)
 
@@ -135,6 +160,10 @@ cp config.example.ini config.ini
 - Check your site_url in config.ini
 - Verify REST API is enabled
 - For custom post types, ensure they have REST API support
+
+**"SSL error" or "TLS version" error**
+- Use Python 3.11 or newer: `python3.11 publish.py file.md`
+- Or install via Homebrew: `brew install python@3.11`
 
 **Content looks wrong in WordPress**
 - Check the Gutenberg block format in WordPress editor
